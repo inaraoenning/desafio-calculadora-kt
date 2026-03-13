@@ -7,19 +7,45 @@ fun main() {
     // Exemplo:
     // 5 + 7 * 9 / 2 (5 - 4) * 2
 
-    print("Informe a operação ex:5 + 7 * 9 / 2 (5 - 4) * 2 :")
+    println(" ==== 🧮 Super Calculadora === ")
+    println(
+        """
+        |Digite uma operação
+        |ex: 5 + 7 * 9 / 2 (5 - 4) * 2
+    """.trimMargin()
+    )
     val operacao: String = readln()
 
+    // trim() no kotlin remove apenas o espaço do inicio e fim
+    // replace() substitui
+
+    // Verificar se tem 9 digitos
     if (operacao.length < 9) {
-        println("A operação deve conter no mínimo 9 caracteres")
+        println("❌ A operação deve ter o mínimo 9 caracteres.")
         return
     }
 
-    // Verifica se é digito
-    val isDigit = operacao.isDigit()
+    // Remove espacos
+    val semEspacos = operacao.replace(" ", "")
 
-    println(operacao)
-    println("Tamanho da operação ${operacao.length}")
+    //  Adiciona a multiplicação invisível
+    var operacaoFormatada: String = ""
+
+    for (i in 0 until semEspacos.length) {
+        val caractereAtual = semEspacos[i]
+        operacaoFormatada += caractereAtual
+
+        // Se não é o ultimo caractere, olha o proximo
+        if (i + 1 < semEspacos.length) {
+            val proximoCaractere = semEspacos[i + 1]
+
+            // se a letra atual for numero E a proxima for ( insere o *
+            if (caractereAtual.isDigit() && proximoCaractere == '(') {
+                operacaoFormatada += '*'
+            }
+        }
+    }
+
 
 
 }
