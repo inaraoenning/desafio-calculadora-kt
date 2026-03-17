@@ -16,6 +16,9 @@ fun main() {
     )
     val operacao: String = readln()
 
+    // Tokenização: Separa a string em partes menores chamadas de token (numeros individuais, operadores e parenteses)
+    // Avaliação: Calcular tokens na ordem correta, utilizando stacks
+
     // trim() no kotlin remove apenas o espaço do inicio e fim
     // replace() substitui
 
@@ -31,6 +34,7 @@ fun main() {
     //  Adiciona a multiplicação invisível
     var operacaoFormatada: String = ""
 
+
     for (i in 0 until semEspacos.length) {
         val caractereAtual = semEspacos[i]
         operacaoFormatada += caractereAtual
@@ -39,13 +43,24 @@ fun main() {
         if (i + 1 < semEspacos.length) {
             val proximoCaractere = semEspacos[i + 1]
 
-            // se a letra atual for numero E a proxima for ( insere o *
+            // se a letra atual for numero e a proxima for ( insere o *
             if (caractereAtual.isDigit() && proximoCaractere == '(') {
+                operacaoFormatada += '*'
+            }
+
+            // se o caractere atual for ) e a proxima for numero insere *
+            if (caractereAtual == ')' && proximoCaractere.isDigit()) {
+                operacaoFormatada += '*'
+            }
+
+            // se o caractere for ) e o proximo (
+            if (caractereAtual == ')' && proximoCaractere == '(') {
                 operacaoFormatada += '*'
             }
         }
     }
 
-
+    // Stringbuilder - mutable sequence of characters that can be used to efficiently perform multiple string manipulation operations.
+    // val sb = StringBuilder()
 
 }
